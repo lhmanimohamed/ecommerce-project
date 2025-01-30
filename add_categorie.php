@@ -21,6 +21,7 @@
 
         $lebelle = $_POST["lebelle"];
         $Description = $_POST["description"];
+        $icon = $_POST["icon"];
 
         
 
@@ -28,10 +29,8 @@
 
                 require_once 'include/database.php';
 
-                
-
-                 $stmt = $pdo->prepare("INSERT INTO categorie(lebelle,description) VALUES(?,?)");
-                  $stmt->execute([$lebelle,$Description]);
+                 $stmt = $pdo->prepare("INSERT INTO categorie(lebelle,description) VALUES(?,?,?)");
+                  $stmt->execute([$lebelle,$Description,$icon]);
 
             header("location:categories.php");
 
@@ -55,8 +54,11 @@
   <div class="mb-3">
      <label >Description</label>
     <textarea class="form-control" name="description" ></textarea>
-   
-   
+  </div>
+
+   <div class="mb-3">
+    <label class="form-label">Icon</label>
+    <input type="text" class="form-control" id="exampleInputName2" name="icon" >
   </div>
 
   <input type="submit" value="add categorie" class="btn btn-primary my-2" name="add_categorie">
