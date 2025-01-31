@@ -29,16 +29,17 @@
 
         $lebelle = $_POST["lebelle"];
         $Description = $_POST["description"];
+        $icon = $_POST["icon"];
 
         
 
             if(!empty($lebelle) && !empty($Description)){
 
                  $stmt = $pdo->prepare("UPDATE categorie 
-                                           SET lebelle=? , description=?
+                                           SET lebelle=? , description=? , icon=?
                                            WHERE id=?");
 
-                  $stmt->execute([$lebelle,$Description,$id]);
+                  $stmt->execute([$lebelle,$Description,$icon,$id]);
 
             header("location:categories.php");
 
@@ -67,8 +68,11 @@
   <div class="mb-3">
      <label >Description</label>
     <textarea class="form-control" name="description" ><?php echo $categorie['description']?></textarea>
-   
-   
+  </div>
+
+   <div class="mb-3">
+    <label class="form-label">Icon</label>
+    <input type="text" class="form-control" value="<?= $categorie['icon']?>" name="icon" >
   </div>
 
   <input type="submit" value="Modifier categorie" class="btn btn-primary my-2" name="modifier">

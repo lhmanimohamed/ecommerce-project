@@ -18,13 +18,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>categorie | <?php echo $categorie["lebelle"]?></title>
 </head>
 <body>
      <?php include '../include/nav_front.php'; ?>
    
    <div class="container py.2">
-    <h2><?php echo $categorie["lebelle"]?></h2>
+    <h2><?php echo $categorie["lebelle"]?>  <span class="fa <?php echo $categorie["icon"]?>"></span></h2>
 
     <div class="container">
         <div class="row">

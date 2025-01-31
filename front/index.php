@@ -11,7 +11,7 @@
     <?php include '../include/nav_front.php'; ?>
     
    <div class="container py.2">
-    <h2><i class="fa-solid fa-list"> categories liste </i></h2>
+    <h2><i class="fa fa-solid fa-list"></i> categories liste </h2>
 
      <ul class="list-group list-group-flush w-25">
  
@@ -22,7 +22,10 @@
 
            foreach($categories as $categorie){
             ?><li class="list-group-item">
-                <a href="categorie.php?id=<?php echo $categorie->id?>" class="btn btn-light"><?php echo $categorie->lebelle?></a>
+               
+                <a href="categorie.php?id=<?php echo $categorie->id?>" class="btn btn-light">
+                    <i class="<?php echo $categorie->icon?>"></i>
+                <?php echo $categorie->lebelle?></a>
             </li><?php
            }
         

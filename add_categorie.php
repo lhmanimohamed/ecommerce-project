@@ -29,7 +29,7 @@
 
                 require_once 'include/database.php';
 
-                 $stmt = $pdo->prepare("INSERT INTO categorie(lebelle,description) VALUES(?,?,?)");
+                 $stmt = $pdo->prepare("INSERT INTO categorie(lebelle,description,icon) VALUES(?,?,?)");
                   $stmt->execute([$lebelle,$Description,$icon]);
 
             header("location:categories.php");
