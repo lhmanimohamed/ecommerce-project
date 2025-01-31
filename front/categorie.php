@@ -34,16 +34,24 @@
 
         foreach($products as $product){
             ?>
-            <div class="card mb-3 col-md-4">
-  <img src="..." class="card-img-top" alt="...">
+            <div class="card mb-3 col-md-4 m-1">
+  <img src="../upload/products_images/<?= $product["image"]?>" class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title"><?= $product["lebelle"]?></h5>
-    <p class="card-text"><?= $product["prix"]?></p>
+    <p class="card-text"><?= $product["description"]?></p>
     <p class="card-text"><small class="text-body-secondary">added in : <?= date_format(date_create($product["date_creation"]),"Y/m/d")?></small></p>
             </div>
          </div>
             <?php
 
+        }
+
+        if(empty($products)){
+          ?>
+          <div class="alert alert-info" role="alert">
+            no products yet
+        </div>
+          <?php
         }
         ?>
             

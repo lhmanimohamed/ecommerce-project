@@ -25,17 +25,48 @@
    if(isset($_POST["modifier"])){
 
         $lebelle = $_POST["lebelle"];
+        $description = $_POST["description"];
         $prix = $_POST["prix"];
         $discount = $_POST["discount"];
         $categorie = $_POST["categorie"];
 
+        $filename = "";
+        if(!empty($_FILES["image"]["name"])){
+          $image = $_FILES["image"]["name"];
+
+          $filename = uniqid().$image;
+          move_uploaded_file($_FILES["image"]["tmp_name"], "upload/products_images/".$filename);
+
+        }
+
+
     if(!empty($lebelle) && !empty($prix) && !empty($categorie)){
 
-        $stmt = $pdo->prepare("UPDATE produit 
-                                      SET lebelle=?,prix=?,discount=?,id_categorie=?
-                                      WHERE id=?");
+       $query = "UPDATE produit 
+                SET lebelle=?,description=?,prix=?,discount=?,id_categorie=?
+                WHERE id=?";
 
-        $updated = $stmt->execute([$lebelle,$prix,$discount,$categorie,$id]); 
+      if(!empty($filename)){
+
+        $query = "UPDATE produit 
+                SET lebelle=?,description=?,prix=?,discount=?,image=?,id_categorie=?
+                WHERE id=?";
+
+        $stmt = $pdo->prepare($query);
+        $updated = $stmt->execute([$lebelle,$description,$prix,$discount,$filename,$categorie,$id]); 
+      }else{
+
+         $query = "UPDATE produit 
+                SET lebelle=?,description=?,prix=?,discount=?,id_categorie=?
+                WHERE id=?";
+
+        $stmt = $pdo->prepare($query);
+        $updated = $stmt->execute([$lebelle,$description,$prix,$discount,$categorie,$id]);
+
+      }
+      
+
+        
         if($updated){
              header("location:products.php"); 
         } else{
@@ -64,7 +95,7 @@
     <?php
 
        ?>
-      <form action="" method="post">
+      <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $products["id"]?>">
   <div class="mb-3">
     <label class="form-label">Lebelle</label>
@@ -72,9 +103,24 @@
   </div>
 
   <div class="mb-3">
+     <label >Description</label>
+    <textarea class="form-control" name="description" ><?= $products["description"]?></textarea>
+  </div>
+
+  <div class="mb-3">
     <label class="form-label">prix</label>
     <input type="number" step="0.1" class="form-control"  name="prix" min="0" value="<?= $products["prix"]?>">
   </div>
+
+   <div class="mb-3">
+    <label class="form-label">Image</label>
+    <input type="file" class="form-control" name="image">
+    <img src="upload/products_images/<?= $products["image"]?>" width="120">
+  </div>
+
+  <?php
+     
+  ?>
 
   <div class="mb-3">
     <label class="form-label">discount</label>

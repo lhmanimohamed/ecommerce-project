@@ -26,9 +26,19 @@
       if(isset($_POST["add_product"]))   {
 
         $lebelle = $_POST["lebelle"];
+        $description = $_POST["description"];
         $prix = $_POST["prix"];
         $discount = $_POST["discount"];
         $categorie = $_POST["categorie"];
+
+        $filename = "product.png";
+        if(!empty($_FILES["image"]["name"])){
+          $image = $_FILES["image"]["name"];
+
+          $filename = uniqid().$image;
+          move_uploaded_file($_FILES["image"]["tmp_name"], "upload/products_images/".$filename);
+
+        }
 
         //extract($_POST); 
 
@@ -36,8 +46,9 @@
 
             require_once 'include/database.php';
 
-            $stmt = $pdo->prepare("INSERT INTO produit(lebelle,prix,discount,id_categorie) VALUES(?,?,?,?)");
-            $inserted = $stmt->execute([$lebelle,$prix,$discount,$categorie]);
+            $stmt = $pdo->prepare("INSERT INTO produit(lebelle,description,prix,discount,image,id_categorie) VALUES(?,?,?,?,?,?)");
+            $inserted = $stmt->execute([$lebelle,$description,$prix,$discount,$filename
+            ,$categorie]);
              
             if($inserted){
 
@@ -63,21 +74,32 @@
             }
       }
 
+
        ?>
-      <form action="" method="post">
+      <form method="post" enctype="multipart/form-data">
   <div class="mb-3">
     <label class="form-label">Lebelle</label>
     <input type="text" class="form-control"  name="lebelle" >
   </div>
 
   <div class="mb-3">
-    <label class="form-label">prix</label>
+     <label >Description</label>
+    <textarea class="form-control" name="description" ></textarea>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Prix</label>
     <input type="number" step="0.1" class="form-control"  name="prix" min="0" >
   </div>
 
   <div class="mb-3">
-    <label class="form-label">discount</label>
+    <label class="form-label">Discount</label>
     <input type="number" class="form-control" name="discount" min="0" max="90">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Image</label>
+    <input type="file" class="form-control" name="image">
   </div>
 
 
