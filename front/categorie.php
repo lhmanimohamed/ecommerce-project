@@ -37,6 +37,7 @@
             <div class="card mb-3 col-md-4 m-1">
   <img src="../upload/products_images/<?= $product["image"]?>" class="card-img-top" alt="...">
   <div class="card-body">
+    <a href="product_detail.php?id=<?=$product["id"]?>" class="btn stretched-link"></a>
     <h5 class="card-title"><?= $product["lebelle"]?></h5>
     <p class="card-text"><?= $product["description"]?></p>
     <p class="card-text"><small class="text-body-secondary">added in : <?= date_format(date_create($product["date_creation"]),"Y/m/d")?></small></p>

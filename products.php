@@ -45,7 +45,7 @@
               <td><?= $prix?> Dh</td>
                <td><?= $prixFinal?></td>
                <td><?= $product->categorie_lebelle?></td>
-               <td><?= $product->date_creation?></td>
+               <td><?= date_format(date_create($product->date_creation),"Y/m/d")?></td>
 
                 <td>
           <a href="modifier_product.php?id=<?php echo $product->id?>" class="btn btn-primary btn-sm" >modifier</a>

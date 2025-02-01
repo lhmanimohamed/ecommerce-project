@@ -39,7 +39,7 @@
                <td>
                   <i class="fa <?= $categorie["icon"]?>"></i>
                </td>
-               <td><?= $categorie["date_creation"]?></td>
+               <td><?= date_format(date_create($categorie["date_creation"]),"Y/m/d")?></td>
 
                 <td>
       <a href="modifier_categorie.php?id=<?php echo $categorie["id"] ?>" class="btn btn-primary btn-sm">Modifier</a>
