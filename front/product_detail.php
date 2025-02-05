@@ -7,6 +7,7 @@
         $stmt->execute([$id]);
         $produit =$stmt->fetch(PDO::FETCH_ASSOC);
         var_dump($produit);
+        
 
          $stmt = $pdo->prepare("SELECT * FROM produit WHERE id_categorie=?");
          $stmt->execute([$id]);
